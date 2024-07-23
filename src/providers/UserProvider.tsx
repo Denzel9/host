@@ -10,7 +10,7 @@ interface IUserContext {
   id: string
 }
 
-const defaultId = 'mxHNl3P9My7onSCdgVzm'
+// const defaultId = 'mxHNl3P9My7onSCdgVzm'
 
 export const UserContext = createContext<IUserContext>({} as IUserContext)
 
@@ -18,13 +18,13 @@ const UserProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState({} as IUser)
 
-  const id = localStorage.getItem('id') || defaultId
+  const id = localStorage.getItem('id')
 
   useEffect(() => {
     onSnapshot(doc(db, 'users', id), (doc) => {
       setUser({ ...(doc.data() as Omit<IUser, 'docId'>), docId: doc.id })
     })
-    localStorage.setItem('id', id)
+    localStorage.setItem('id', user?.docId)
   }, [])
 
   useEffect(() => {
