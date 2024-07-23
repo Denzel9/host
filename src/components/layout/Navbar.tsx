@@ -6,14 +6,15 @@ import { AuthContext } from '../../providers/AuthProvider'
 import classNames from 'classnames'
 import { useLocation } from 'react-router-dom'
 
-// const WeatherWidget = lazy(() => import('WEATHER/Widget'))
+const WeatherWidget = lazy(() => import('WEATHER/Widget'))
 
 const Navbar: FunctionComponent = () => {
   const { setisOpenModal } = useContext(ModalContext)
   const { user } = useContext(AuthContext)
   const location = useLocation()
 
-  const getTitlePage = location?.pathname[1]?.toUpperCase() + location?.pathname?.slice(2)
+  const getTitlePage =
+    location?.pathname?.split('/')[1][0].toUpperCase() + location?.pathname?.split('/')[1].slice(1)
 
   return (
     <div
@@ -26,7 +27,7 @@ const Navbar: FunctionComponent = () => {
         <div className=" pl-28 flex justify-between items-center w-full">
           <p className=" text-4xl">{getTitlePage}</p>
           <div className=" flex gap-3">
-            {/* <WeatherWidget /> */}
+            <WeatherWidget />
             <button className=" relative rounded-full w-10 h-10 bg-dark border border-green-800">
               {user?.photoURL ? (
                 <img src={user?.photoURL} alt="user" />
