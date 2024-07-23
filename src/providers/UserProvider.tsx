@@ -24,8 +24,9 @@ const UserProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
     onSnapshot(doc(db, 'users', id), (doc) => {
       setUser({ ...(doc.data() as Omit<IUser, 'docId'>), docId: doc.id })
     })
-    localStorage.setItem('id', user?.docId)
   }, [])
+
+  useEffect(() => localStorage.setItem('id', user?.docId), [user?.docId])
 
   useEffect(() => {
     localStorage.setItem('city', user?.weather?.city)
