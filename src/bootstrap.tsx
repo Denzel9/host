@@ -5,7 +5,6 @@ import AuthProvider from './providers/AuthProvider'
 import { BrowserRouter } from 'react-router-dom'
 import { App } from './components/App'
 import UserProvider from './providers/UserProvider'
-import React, { lazy } from 'react'
 
 const root = document.getElementById('root')
 

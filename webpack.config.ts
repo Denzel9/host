@@ -27,6 +27,8 @@ export default (env: EnvVariables) => {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'build'),
       clean: true,
+      publicPath:
+        env.mode === 'production' ? 'https://host-mars.netlify.app/' : 'http://localhost:3030/',
     },
     devtool: isDevelopment && 'inline-source-map',
     devServer: isDevelopment
