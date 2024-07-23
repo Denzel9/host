@@ -23,8 +23,6 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
     try {
       const { user } = await register(email, password)
 
-      useEffect(() => user && user?.uid && localStorage.setItem('id', user?.uid), [user])
-
       await addDoc(collection(db, 'users'), {
         id: user.uid,
         name: name || '...',
@@ -46,6 +44,8 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
   }
 
   const loginHandler = async (email: string, password: string) => {
+    const { user } = await login(email, password)
+
     setIsLoading(true)
     try {
       await login(email, password).then(() => localStorage.setItem('id', user.uid))
