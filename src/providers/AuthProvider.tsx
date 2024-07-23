@@ -48,7 +48,7 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
 
     setIsLoading(true)
     try {
-      await login(email, password).then(() => localStorage.setItem('id', user.uid))
+      await login(email, password).then(() => localStorage.setItem('id', user && user.uid))
     } catch (error: any) {
       console.log('Error log:', error)
     } finally {
