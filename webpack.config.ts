@@ -27,8 +27,6 @@ export default (env: EnvVariables) => {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'build'),
       clean: true,
-      publicPath:
-        env.mode === 'production' ? 'https://host-mars.netlify.app/' : 'http://localhost:3030/',
     },
     devtool: isDevelopment && 'inline-source-map',
     devServer: isDevelopment
@@ -87,8 +85,14 @@ export default (env: EnvVariables) => {
       new webpack.container.ModuleFederationPlugin({
         name: 'host',
         remotes: {
-          CALENDAR: 'CALENDAR@http://localhost:3001/remoteEntry.js',
-          WEATHER: 'WEATHER@http://localhost:3000/remoteEntry.js',
+          CALENDAR:
+            env.mode === 'production'
+              ? 'CALENDAR@https://calendar-micro.vercel.app/remoteEntry.js'
+              : 'CALENDAR@http://localhost:3001/remoteEntry.js',
+          WEATHER:
+            env.mode === 'production'
+              ? 'WEATHER@https://weather-micro.vercel.app/remoteEntry.js'
+              : 'WEATHER@http://localhost:3000/remoteEntry.js',
         },
         shared: {
           ...packageJson.dependencies,
