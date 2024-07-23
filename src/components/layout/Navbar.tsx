@@ -14,7 +14,8 @@ const Navbar: FunctionComponent = () => {
   const location = useLocation()
 
   const getTitlePage =
-    location?.pathname?.split('/')[1][0].toUpperCase() + location?.pathname?.split('/')[1].slice(1)
+    location?.pathname?.split('/')[1][0]?.toUpperCase() +
+      location?.pathname?.split('/')[1]?.slice(1) || ''
 
   return (
     <div
