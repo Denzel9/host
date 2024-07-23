@@ -26,7 +26,7 @@ const UserProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
     })
   }, [])
 
-  useEffect(() => localStorage.setItem('id', user?.docId), [user?.docId])
+
 
   useEffect(() => {
     localStorage.setItem('city', user?.weather?.city)
