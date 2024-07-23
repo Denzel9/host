@@ -35,9 +35,7 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
           favorites: [],
         },
         tags: [],
-      }).then(() => {
-        localStorage.setItem('id', user.uid)
-      })
+      }).then(() => localStorage.setItem('id', user.uid))
     } catch (error: any) {
       console.log('Error reg:', error)
     } finally {
@@ -48,7 +46,7 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
   const loginHandler = async (email: string, password: string) => {
     setIsLoading(true)
     try {
-      await login(email, password)
+      await login(email, password).then(() => localStorage.setItem('id', user.uid))
     } catch (error: any) {
       console.log('Error log:', error)
     } finally {
@@ -59,7 +57,7 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
   const logoutHandler = async () => {
     setIsLoading(true)
     try {
-      await logout()
+      await logout().then(() => localStorage.removeItem('id'))
     } catch (error: any) {
       console.log('Error logout:', error)
     } finally {
