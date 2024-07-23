@@ -23,7 +23,7 @@ const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) 
     try {
       const { user } = await register(email, password)
 
-      useEffect(() => localStorage.setItem('id', user?.uid), [user])
+      useEffect(() => user && user?.uid && localStorage.setItem('id', user?.uid), [user])
 
       await addDoc(collection(db, 'users'), {
         id: user.uid,
